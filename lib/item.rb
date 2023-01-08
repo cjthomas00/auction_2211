@@ -3,6 +3,12 @@ class Item
 
   def initialize(name)
     @name = name
-    @bids = {}
+    @bids = Hash.new { |k, v| k[v] = []}
   end
+
+  def add_bid(attendee, bid_amount)
+   @bids[attendee] = bid_amount
+  end
+
+ 
 end
