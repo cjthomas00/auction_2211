@@ -1,6 +1,5 @@
 class Attendee
   attr_reader :name, :budget
-  attr_accessor :budget
 
   def initialize(info)
     @name = info[:name]
