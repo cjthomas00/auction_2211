@@ -14,4 +14,10 @@ class Auction
       item.name
     end
   end
+
+  def unpopular_items
+    @items.find_all do |item|
+     item.bids == {}
+    end
+  end
 end
