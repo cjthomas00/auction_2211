@@ -1,8 +1,9 @@
 class Auction
-  attr_reader :items
+  attr_reader :items, :bidders
 
   def initialize
     @items = []
+    @bidders =[]
   end
 
   def add_item(item)
@@ -24,5 +25,12 @@ class Auction
       revenue += item.current_high_bid if item.bids != {}
     end
     revenue
+  end
+
+  def bidders 
+    @items.map do |item|
+      if item.bids == true
+      end
+    end
   end
 end
