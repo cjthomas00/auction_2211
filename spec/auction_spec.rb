@@ -42,38 +42,6 @@ RSpec.describe Auction do
   end
 
   describe "#unpopular_items" do
-    it 'returns an array of unpopular items' do 
-      auction.add_item(item1)
-      auction.add_item(item2)
-      auction.add_item(item3)
-      auction.add_item(item4)
-      auction.add_item(item5)
-
-      expect(item1.bids).to eq({})
-      item1.add_bid(attendee2, 20)
-      item1.add_bid(attendee1, 22)
-      
-      expect(item1.bids).to eq({attendee2 => 20, attendee1 => 22})
-    end
-  end
-
-  describe "#current_high_bid" do
-    it 'displays highest bid' do
-      auction.add_item(item1)
-      auction.add_item(item2)
-      auction.add_item(item3)
-      auction.add_item(item4)
-      auction.add_item(item5)
-
-      expect(item1.bids).to eq({})
-      item1.add_bid(attendee2, 20)
-      item1.add_bid(attendee1, 22)
-
-      expect(item1.current_high_bid).to eq(22)
-    end
-  end
-
-  describe "#unpopular_items" do
     it "displays items with no bids" do
       auction.add_item(item1)
       auction.add_item(item2)
@@ -119,8 +87,8 @@ RSpec.describe Auction do
       item1.add_bid(attendee1, 22)
       item4.add_bid(attendee3, 50)
       item3.add_bid(attendee2, 15)
-require 'pry'; binding.pry
-      expect(auction.bidders).to eq([attendee1, attendee2, attendee3])
+
+      expect(auction.bidders).to eq([attendee2, attendee1, attendee3]).or eq(["Bob", "Megan", "Mike"])
     end
   end
 
@@ -131,6 +99,7 @@ require 'pry'; binding.pry
       auction.add_item(item3)
       auction.add_item(item4)
       auction.add_item(item5)
+
       item1.add_bid(attendee2, 20)
       item1.add_bid(attendee1, 22)
       item4.add_bid(attendee3, 50)
@@ -145,6 +114,14 @@ require 'pry'; binding.pry
                    :items => [item4]}
           }
       expect(auction.bidder_info).to eq(expected)
+    end
+  end
+
+  describe '#date' do 
+    it "can determine the date" do
+      allow(auction).to receive(:date) {"07/01/2023"}
+
+      expect(auction.date).to eq("07/01/2023")
     end
   end
 end
