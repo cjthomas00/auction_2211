@@ -43,18 +43,25 @@ class Auction
   end
 
   def bidder_info
-    bidder_info_hash = {}
-
-    bidders.each do |attendee|
-      bidder_info_hash[attendee] = { 
+    bidder_info_hash = {} #<==== creates empty hash.
+    
+    bidders.each do |attendee| #<== iterates over the bidders array.
+      bidder_info_hash[attendee] = { #<== makes attendee the key in the bidder_info_hash.
         budget: attendee.budget,
-        items: items_by_attendee(attendee) 
+        items: items_by_attendee(attendee) # <== makes attendee budget and items they've bid on values for the Attendee key.
     }
     end
       bidder_info_hash
+      #   #bidder_info = Hash.new {|hash, key| hash[key] = {budget: 0, items: []}}
+      # # bidders = @items.flat_map {|item| item.ids.keys}.uniq
+      # #bider.each do |attendee|
+      #   bidder_info[attendee][:budget] = attendee.budget
+      #   bidder_info[attendee][:items] += @items.find_all {|item| item.bids.include?(attendee) }
+  # end
+  # bidder_info
   end
     
-  def items_by_attendee(attendee)
+  def items_by_attendee(attendee)  # <== helper method that selects its that an attendee in the arugment parameter has bid on.
       @items.select do |item|
         item.bids.keys.include?(attendee)
       end
